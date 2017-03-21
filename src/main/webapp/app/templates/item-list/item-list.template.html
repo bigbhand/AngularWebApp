@@ -1,0 +1,116 @@
+
+<div style="width: 10%; height: 100%; position: absolute;">
+	<div id="mySidenav" class="sidenav">
+		<a class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="#/manage-item">Manage Item</a> 
+		<a href="#">About</a>
+		<a href="#">Services</a> 
+		<a href="#">Clients</a> 
+		<a href="#">Contact</a>
+	</div>
+
+	<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
+
+</div>
+
+<br>
+<div style="position: relative; left: 50px; top: -20px; width: 95%;">
+
+	<div class="catagory-select catagory">
+		<select width="120px">
+			<option selected>All</option>
+			<option>Mobile</option>
+		</select>
+	</div>
+	<input type="text"
+		style="width: 600px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; padding-left: 12px;"
+		ng-model="$ctrl.search" placeholder=" search for name or model" /> <span><input
+		type="submit" value="&#128269;" class="searchBtn" /></span>
+
+	<div
+		style="display: inline; float: right; position: relative; top: 4px;">
+		<span> <label style="font-family: arial; font-size: 12px;">Sort
+				by </label><select ng-model="$ctrl.sortByModel"
+			ng-change="$ctrl.updateSortModels()">
+				<option value="+name">Name (a->z)</option>
+				<option value="-name">Name (z->a)</option>
+				<option value="+price">Price (low -> high)</option>
+				<option value="-price">Price (high -> low)</option>
+				<option value="-rating">rating</option>
+				<!-- <option value="+releaseDate">Release Date</option> -->
+		</select>
+		</span>
+		<!--  <span>
+	         <input type="number" min="0" max="10" value="5" style="width: 40px;" step="1" ng-model="$ctrl.rowLimit"/>
+	    </span> -->
+		<span class="layoutBlockIcon" style="font-size: 22px;" ng-click="$ctrl.changeLayout('table')" ng-class="$ctrl.selectedLayout('table')">&#9636;</span>
+		<div class="layoutBlockIcon" ng-click="$ctrl.changeLayout('block')" ng-class="$ctrl.selectedLayout('block')">
+			<div>&#9632;&#9632;</div>
+			<div style="margin: -11px 0px;">&#9632;&#9632;</div>
+		</div>
+	</div>
+
+</div>
+<!--  ng-model="$ctrl.search.name" will search only for Item Name -->
+<!--  ng-model="$ctrl.search" will search for all columns -->
+<br>
+<div ng-show="$ctrl.layout | doShow">
+	<table class="likesTable">
+		<thead>
+			<tr>
+				<th style="width: 240px;" ng-click="$ctrl.sortData('name')">Name
+					<div ng-class="$ctrl.getClassName('name')"></div>
+				</th>
+				<th ng-click="$ctrl.sortData('category')">Category
+					<div ng-class="$ctrl.getClassName('category')"></div>
+				</th>
+				<th ng-click="$ctrl.sortData('color')">Color
+					<div ng-class="$ctrl.getClassName('color')"></div>
+				</th>
+				<th ng-click="$ctrl.sortData('seller')">Seller
+					<div ng-class="$ctrl.getClassName('seller')"></div>
+				</th>
+				<th ng-click="$ctrl.sortData('price')">Price
+					<div ng-class="$ctrl.getClassName('price')"></div>
+				</th>
+				<th ng-click="$ctrl.sortData('rating')">Rating
+					<div ng-class="$ctrl.getClassName('rating')"></div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr
+				ng-repeat="item in $ctrl.items | filter:$ctrl.search | orderBy:$ctrl.sortColumn:$ctrl.reverseSort | limitTo:$ctrl.rowLimit">
+				<td><a href="#/items/{{item.id}}">{{item.name |
+						uppercase }} </a></td>
+				<td>{{item.category | lowercase}}</td>
+				<!-- <td>{{item.releaseDate | date:'dd-MM-yyyy'}}</td> -->
+				<!-- <td>{{item.views | number}}</td> -->
+				<td>{{item.color | lowercase }}</td>
+				<td>{{item.seller}}</td>
+				<td>{{item.price | currency:'&#8377; '}}</td>
+				<td>{{item.rating | ratingFilter}}</td>
+				<!-- <td width="180px"><input type="button" value="Like"
+					ng-click="$ctrl.incrementLikes(item)" /> <input type="button"
+					value="Dislike" ng-click="$ctrl.incrementDislikes(item)" /></td> -->
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+
+<div ng-hide="$ctrl.layout | doShow">
+	<ul class="items">
+		<li ng-repeat="item in $ctrl.items | filter:$ctrl.search | orderBy:$ctrl.sortColumn:$ctrl.reverseSort | limitTo:$ctrl.rowLimit">
+		<diV>
+			<a  href="#" class="thumb">		
+				<img ng-src="app/images/app-logo.png" style="width: 90px;height: 100px;" alt="{{item.itemName}}" />
+			</a>
+			<a href="#/items/{{item.id}}" class="head">{{item.name}}</a>
+			<div style="width: 40%">{{item.price | currency:'&#8377; '}}<span>{{item.model}} {{item.rating|ratingFilter}}</span></div>
+			<p>{{item.snippet}}</p>
+		</diV>
+		</li>
+	</ul>
+</div>
+

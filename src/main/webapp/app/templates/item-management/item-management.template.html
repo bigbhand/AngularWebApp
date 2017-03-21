@@ -1,0 +1,97 @@
+
+<div class="formBackground" >
+
+<div class="styled-select slate">
+	<select ng-model="$ctrl.mode" width="120px" >
+		<option value="true" class="trye">View Existing Item</option>
+		<option value="false">Create New Item</option>
+	</select>
+</div>
+<br><br>
+<div ng-show=$ctrl.mode|doShow>
+Search : <input type="text" size="58" ng-model="$ctrl.searchKey" placeholder=" search for item key"/>
+		<input type="button" value="Search" ng-click="$ctrl.getItemDetails($ctrl.searchKey)"/>
+<br><br>
+</div>
+Status : <span style="color: green">{{$ctrl.status}}</span>
+<br><br>
+<div style="width: 500px">
+
+
+    <form name="itemForm" novalidate>
+	<fieldset>
+	    <legend>Item details:</legend>
+	    	
+	    	<div class="form-group" ng-class="{ 'has-error' : itemForm.name.$dirty && itemForm.name.$invalid }">
+		        <label>Item ID *</label><br>
+		        <input type="text" disabled="disabled" ng-model="$ctrl.item.id">
+		    </div>
+		    
+		    <div class="form-group" ng-class="{ 'has-error' : itemForm.name.$dirty && itemForm.name.$invalid }">
+			    <label>Name*</label><br>
+			    <input type="text" name="name" ng-model="$ctrl.item.name" class="form-control" 
+				    required ng-minlength="3" ng-maxlength="250">
+			    <span ng-show="itemForm.name.$dirty && itemForm.name.$error.required" class="help-block">This field is required.</span>
+			    <span ng-show="itemForm.name.$error.minlength" class="help-block">Name is too short.</span>
+			    <span ng-show="itemForm.name.$error.maxlength" class="help-block">Name is too long.</span>
+		    </div>
+		    
+		    <div class="form-group" ng-class="{ 'has-error' : itemForm.snippet.$dirty && itemForm.snippet.$invalid }">
+			    <label>Snippet</label><br>
+			    <textarea rows="2" cols="50" ng-model="$ctrl.item.snippet" ng-maxlength="250" class="form-control" ></textarea>
+		    </div>
+		    
+		    <div class="form-group" ng-class="{ 'has-error' : itemForm.descr.$dirty && itemForm.descr.$invalid }">
+			    <label>Description</label><br>
+			    <textarea rows="4" cols="50" ng-model="$ctrl.item.descr" ng-maxlength="250" class="form-control" ></textarea>
+		    </div>
+		    
+		    <div class="form-group" ng-class="{ 'has-error' : itemForm.price.$dirty && itemForm.price.$invalid }">
+			    <label>Price*</label><br>
+			    <input type="text" name="price" ng-model="$ctrl.item.price" class="form-control"  required ng-pattern="/^[0-9]{1,7}$/"  />
+			    <span ng-messages="itemForm.price.$error" ng-show="itemForm.price.$dirty && itemForm.price.$error">
+				    <span ng-message="required" class="help-block">This field is required.</span>
+				    <span ng-message="pattern" class="help-block">Enter only numbers.</span>
+			    </span>
+		    </div>
+		    
+		     <div class="form-group" ng-class="{ 'has-error' : itemForm.category.$dirty && itemForm.category.$invalid }" style="display: inline-block;margin-right: 10%;">
+			    <label>Category</label><br>
+			    <select ng-model="$ctrl.item.category | lowercase"  class="form-control" name="category" >
+			    	<option value="mobile">Mobile</option>
+			    	<option value="clothing">Clothing</option>
+			    	<option value="computer">Computer</option>
+			    	<option value="other" selected="selected">Other</option>
+			    </select>
+		    </div>
+		    
+		    <div class="form-group" ng-class="{ 'has-error' : itemForm.color.$dirty && itemForm.color.$invalid }" style="display: inline-block;">
+			    <label>Color</label><br>
+			    <select ng-model="$ctrl.item.color | lowercase"  class="form-control" name="color" >
+			    	<option value="white">White</option>
+			    	<option value="black">Black</option>
+			    	<option value="gold">Gold</option>
+			    	<option value="other" selected="selected">Other</option>
+			    </select>
+		    </div>
+		    
+		     <div class="form-group" ng-class="{ 'has-error' : itemForm.stock.$dirty && itemForm.stock.$invalid }">
+			    <label>Stocks*</label><br>
+			    <input type="text" name="stock" ng-model="$ctrl.item.stocks" class="form-control" required ng-pattern="/^[0-9]{1,7}$/"  />
+			    <span ng-messages="itemForm.stock.$error" ng-show="itemForm.stock.$dirty && itemForm.stock.$error">
+				    <span ng-message="required" class="help-block">This field is required.</span>
+				    <span ng-message="pattern" class="help-block">Enter only numbers.</span>
+			    </span>
+		    </div>
+		    
+   </fieldset>
+   </form>
+   
+   
+  </div> 
+	<br><br>
+   <input type="button" value="Save" ng-click="$ctrl.addItem($ctrl.item)" ng-show="!($ctrl.mode|doShow)"
+          ng-disabled="itemForm.$invalid" />
+   <input type="button" value="Delete" ng-click="$ctrl.deleteItem($ctrl.searchKey)" ng-show=$ctrl.mode|doShow />
+   <input type="button" value="Update" ng-click="$ctrl.updateItem($ctrl.item)" ng-show=$ctrl.mode|doShow />
+</div>

@@ -1,0 +1,32 @@
+<table class="details-table">
+	<tr>
+		<td width="26%">
+			<div class="main-image">
+				<img src="app/images/coolpad_1.jpg" class="phone" />
+			</div>
+		</td>
+		<td style="vertical-align: top;">
+			<div>
+				<h2 class="details-header">{{$ctrl.item.name}}</h2>
+				<span>{{$ctrl.item.rating | ratingFilter}}</span><br><br>
+				<div>Price : {{$ctrl.item.price | currency:'Rs. '}}<br>
+				<span class="small-text">inclusive of all taxes</span><br>
+				<span class="small-text">Cash on Delivery eligible</span><br>
+				<span class="small-text">Sold by : {{$ctrl.item.seller}}</span><br><br>
+				<span class="medium-text">Original Price : {{$ctrl.item.price + $ctrl.item.price * $ctrl.item.discount/100 | currency:'Rs. '}} /-</span><br>
+				<span class="medium-text">Discount : {{$ctrl.item.discount}}%</span>
+				</div>
+				<div>
+					<sapn class="medium-text">Color : {{$ctrl.item.color}}</sapn>
+				</div>
+				<p>
+				 <h4>Specifications:</h4>
+				 {{$ctrl.item.descr}}
+				</p>
+			</div>
+		</td>
+	</tr>
+</table>
+
+ 
+

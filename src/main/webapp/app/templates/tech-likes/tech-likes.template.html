@@ -1,0 +1,24 @@
+<div>
+
+<table class="likesTable">
+	<thead>
+		<tr>
+			<th>Technology</th>
+			<th>Likes</th>
+			<th>Dislikes</th>
+			<th>Vote</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="tech in $ctrl.techs">
+			<td>{{tech.name}}</td>
+			<td>{{tech.likes}}</td>
+			<td>{{tech.dislikes}}</td>
+			<td><input type="button" value="Like" ng-click="$ctrl.incrementLikes(tech)"/>
+			    <input type="button" value="Dislike" ng-click="$ctrl.incrementDislikes(tech)"/>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+</div>

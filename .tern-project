@@ -1,0 +1,49 @@
+{
+  "ecmaVersion": 5,
+  "ide": {
+    "scriptPaths": [
+      {
+        "type": "FOLDER",
+        "path": "src/main/webapp/app"
+      },
+      {
+        "type": "FOLDER",
+        "path": "src/main/webapp/app/bower_components"
+      },
+      {
+        "type": "FOLDER",
+        "path": "src/main/webapp/app/core"
+      },
+      {
+        "type": "FOLDER",
+        "path": "src/main/webapp/app/filters"
+      },
+      {
+        "type": "FOLDER",
+        "path": "src/main/webapp/app/images"
+      },
+      {
+        "type": "FOLDER",
+        "path": "src/main/webapp/app/services"
+      },
+      {
+        "type": "FOLDER",
+        "path": "src/main/webapp/app/templates"
+      }
+    ]
+  },
+  "plugins": {
+    "guess-types": {
+      
+    },
+    "outline": {
+      
+    },
+    "angular1": {
+      
+    }
+  },
+  "libs": [
+    "browser"
+  ]
+}

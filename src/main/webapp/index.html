@@ -1,0 +1,52 @@
+<!doctype html>
+ <html ng-app="appModule">
+   <head>
+   	 <meta charset="ISO-8859-1">
+   	 <link rel="stylesheet" href="app/app.css">
+   	 <link rel="stylesheet" href="app/bower_components/font-awesome-4.6.3/css/font-awesome.css">
+     <script src="app/bower_components/angular/angular.js"></script>
+     <script src="app/bower_components/angular-route/angular-route.js"></script>
+     <script src="app/bower_components/angular-resource/angular-resource.js"></script>
+     <script src="app/bower_components/angular-messages/angular-messages.js"></script>
+     <script src="app/app.module.js"></script>
+     <script src="app/services/item-service.module.js"></script>
+     <script src="app/services/item-service.service.js"></script>
+     <script src="app/templates/item-list/item-list.module.js"></script>
+     <script src="app/templates/item-list/item-list.component.js"></script>
+     <script src="app/filters/filters.module.js"></script>
+     <script src="app/filters/ratingFilter.js"></script>
+     <script src="app/filters/doShowFilter.js"></script>
+     <script src="app/templates/tech-likes/tech-likes.module.js"></script>
+     <script src="app/templates/tech-likes/tech-likes.component.js"></script>
+     <script src="app/templates/item-details/item-details.module.js"></script>
+     <script src="app/templates/item-details/item-details.component.js"></script>
+     <script src="app/templates/item-management/item-management.module.js"></script>
+     <script src="app/templates/item-management/item-management.component.js"></script>
+     <script src="app/templates/web-header/web-header.module.js"></script>
+     <script src="app/templates/web-header/web-header.component.js"></script>
+     <script src="app/templates/web-footer/web-footer.module.js"></script>
+     <script src="app/templates/web-footer/web-footer.component.js"></script>
+   	 <!-- <base href="/" /> -->
+     
+     <script type="text/javascript">
+	   function openNav() {
+		    document.getElementById("mySidenav").style.width = "250px";
+		}
+	
+		function closeNav() {
+		    document.getElementById("mySidenav").style.width = "0";
+		}
+	</script>
+     
+   </head>
+   <body>
+     
+     <web-header></web-header>
+     
+     <div ng-view ></div>
+     
+     <web-footer></web-footer>
+     
+   </body>
+ </html>
+
