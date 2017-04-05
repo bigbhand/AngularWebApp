@@ -8,16 +8,42 @@ angular.module('itemManagement')
     	   templateUrl : 'app/templates/item-management/item-management.template.html',
     	   controller : ['itemService',function ItemDetailsController(itemService){
     		 
-    		   var item = {};
+    		   var initialItem = {
+    				   category: "",
+    				   color: "",
+    				   descr: "",
+    				   discount: undefined,
+    				   id : undefined,
+    				   name: "",
+    				   price: undefined,
+    				   rating: undefined,
+    				   seller: "",
+    				   snippet: "",
+    				   stocks: undefined
+    		   };
     		   var status ="";
-    		   var mode = "true";
 
-    		   this.item = item;
+    		   this.initialItem = initialItem;
+    		   this.item = angular.copy(initialItem);
     		   this.status = status;
-    		   this.mode = mode;
-    		   this.regex="^[\\d]*$"
+    		   this.mode = "view";
+    		   this.regex="^[\\d]*$";
+    		   this.isCreate = false;
     		   
     		   var self = this;
+    		   
+    		   this.resetFields = function(){
+    			   
+    			   if(this.mode.startsWith("create"))
+				   {
+    				   this.isCreate = true;
+    				   this.item = angular.copy(initialItem);
+				   }else{
+					   this.isCreate = false;
+					   this.item = angular.copy(initialItem);
+					   this.searchKey = "";
+				   }
+    		   }
     		   
                self.getItemDetails = function(searchKey){
             	   
@@ -31,11 +57,22 @@ angular.module('itemManagement')
                
                self.deleteItem = function(searchKey){
             	   
-            	   itemService.deleteItem(searchKey).success(function(status) 
-            		{
-            		  self.status = "deleted!";
-            		  self.item={};
-            		});
+            	  /* itemService.deleteItem(searchKey).then(function(result){
+            		  self.status = status;
+            		  self.item=angular.copy(self.initialItem);
+            		}, function(error){
+            			 self.status = "ERROR!!";
+            		});*/
+            	   
+                       $http({
+                           method : 'DELETE',
+                           url : 'http://localhost:8080/mobiApp/webapi/items/' + searchKey
+                       }).then(function(result){
+                 		  self.status = status;
+                		  self.item=angular.copy(self.initialItem);
+                		}, function(error){
+                			 self.status = "ERROR!!";
+                		});
             	   
                }
                
