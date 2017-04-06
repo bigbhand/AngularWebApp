@@ -1,1 +1,1 @@
-angular.module('itemList',['demoService']);
+angular.module('itemList',['ngAria','ngAnimate','ngMaterial','demoService']);

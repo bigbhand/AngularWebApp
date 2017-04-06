@@ -1,14 +1,20 @@
-/**
- * 
- */
 
 angular.module('itemManagement')
        .component('itemManagement',{
     	   
     	   templateUrl : 'app/templates/item-management/item-management.template.html',
-    	   controller : ['itemService',function ItemDetailsController(itemService){
-    		 
-    		   var initialItem = {
+    	   controller : ['$routeParams','itemService',function ItemDetailsController($routeParams, itemService){
+    		   
+    		   var self = this;
+    		   
+    		   this.initialize = function(){
+    			   
+    			   self.mode = "view";
+    			   self.regex="^[\\d]*$";
+    			   self.isCreate = false;
+    			   self.status ="";
+        		   
+    			   self.initialItem =  {
     				   category: "",
     				   color: "",
     				   descr: "",
@@ -20,28 +26,37 @@ angular.module('itemManagement')
     				   seller: "",
     				   snippet: "",
     				   stocks: undefined
-    		   };
-    		   var status ="";
-
-    		   this.initialItem = initialItem;
-    		   this.item = angular.copy(initialItem);
-    		   this.status = status;
-    		   this.mode = "view";
-    		   this.regex="^[\\d]*$";
-    		   this.isCreate = false;
-    		   
-    		   var self = this;
+    			   };
+    			   
+    			   self.item = angular.copy(self.initialItem);
+    			   
+    			   if($routeParams.id != null)
+				   {
+    				   self.getItemDetails($routeParams.id);
+				   }
+    			   
+    		   }
     		   
     		   this.resetFields = function(){
     			   
     			   if(this.mode.startsWith("create"))
 				   {
     				   this.isCreate = true;
-    				   this.item = angular.copy(initialItem);
+    				   this.item = angular.copy(self.initialItem);
+    				   this.getNewItemID();
 				   }else{
 					   this.isCreate = false;
-					   this.item = angular.copy(initialItem);
+					   this.item = angular.copy(self.initialItem);
 					   this.searchKey = "";
+				   }
+    		   }
+    		   
+    		   this.checkForEnter = function(event){
+    			   
+    			   console.log(event);
+    			   if(event.keyCode == 13)
+				   {
+    				   this.getItemDetails(this.searchKey);
 				   }
     		   }
     		   
@@ -95,8 +110,24 @@ angular.module('itemManagement')
 						});
 					   
 				}
+				
+				self.getNewItemID = function(){
+					
+					itemService.getNewItemID()
+							   .then(function success(result){
+								   console.log(result);
+								   console.log(result.data);
+								   self.item.id = result.data;
+								   self.status = "";
+							   },function failure(error){
+								   self.status = "ERROR!";
+							   })
+				}
     		   
+				 this.initialize();
+				
     	   }]
     		   
        });
+
 

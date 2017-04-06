@@ -3,14 +3,26 @@ angular.module('itemList')
 		  
 		   templateUrl: 'app/templates/item-list/item-list.template.html',
 		   controller: 
-			  ['itemService', function TechLikesController(itemService) {
+			  ['itemService', '$mdDialog', '$http', function TechLikesController(itemService, $mdDialog, $http) {
 		                  
 				  			var self = this;
 				  			self.items = [];
 			   				
-				  			itemService.getAllItems().success(function(result){
+				  			this.refreshGrid = function()
+				  			{
+				  				itemService.getAllItems()
+					  			           .then(function success(result){
+					  			        	   console.log(result);
+					  			        	   self.items = result.data;
+					  			        	   
+					  			           }, function error(error){
+					  			        	   console.log(error);
+					  			           });
+				  			}
+				  			
+				  			/*itemService.getAllItems().success(function(result){
 			   					self.items = result;
-			   				});
+			   				});*/
 			   				
 			   				
 			   				var updateSortModels = function(){
@@ -93,6 +105,44 @@ angular.module('itemList')
 			   					
 			   					return false;
 			   				};*/
+			   				
+			   				this.showDeleteConfirm = function(event, id){
+			   					
+			   					var confirmPop = $mdDialog.confirm()
+			   					                          .title('Delete')
+			   					                          .textContent('Are you sure you want to delete the item?')
+			   					                          .targetEvent(event)
+			   					                          .ok('Yes')
+			   					                          .cancel('No');
+			   					                          
+			   					$mdDialog.show(confirmPop)
+			   					          .then(function ok(){
+			   					        	   
+			   					        	  /*self.deleteItem(id);*/
+			   					        	  
+			   					          }, function cancel(){
+			   					        	  
+			   					          });
+			   				};
+			   				
+			   				self.deleteItem = function(searchKey){
+			             	   
+		                         $http({
+		                             method : 'DELETE',
+		                             url : 'http://localhost:8080/mobiApp/webapi/items/' + searchKey
+		                         }).then(function(result){
+		                        	   
+		                        	 	self.refreshGrid();
+		                        	   
+			                  		}, function(error){
+			                  			
+			                  			 self.showAlert('Oops! something went wrong..');
+			                  			 
+			                  		});
+			              	   
+			                 }
+			   				
+			   				this.refreshGrid();
 		                }]
 		   
 	   });

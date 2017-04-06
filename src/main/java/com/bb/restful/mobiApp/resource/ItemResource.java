@@ -33,6 +33,14 @@ public class ItemResource {
 		return new ItemService().getItem(id);
 	}
 	
+	@GET
+	@Path("/newID")
+	@Produces(MediaType.TEXT_PLAIN)
+	public int getNewItemID()
+	{
+		return new ItemService().getNewItemID();
+	}
+	
 	@POST
 	public Item addItem(Item item)
 	{

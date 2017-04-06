@@ -35,7 +35,13 @@ angular.module('demoService')
 			    	}, function(rejection) {
 			    	    console.log(rejection.data);
 			    	});*/
+			   },
+			   getNewItemID: function(){
+				   
+				   var url = "http://localhost:8080/mobiApp/webapi/items/newID";
+			   	   return $http.get(url);
 			   }
+			   
 		   }
 	   
 		  /* var itemService = {};

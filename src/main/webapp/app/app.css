@@ -525,3 +525,8 @@ img:HOVER {
 .details-table .medium-text{
 	font-size: 15px;
 }
+
+.pointerClass:HOVER{
+    cursor: pointer;
+    color:#e58d05;
+}

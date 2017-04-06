@@ -8,6 +8,9 @@
      <script src="app/bower_components/angular-route/angular-route.js"></script>
      <script src="app/bower_components/angular-resource/angular-resource.js"></script>
      <script src="app/bower_components/angular-messages/angular-messages.js"></script>
+     <script src="app/bower_components/angular-animate/angular-animate.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-aria.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.js"></script>
      <script src="app/app.module.js"></script>
      <script src="app/services/item-service.module.js"></script>
      <script src="app/services/item-service.service.js"></script>
@@ -26,23 +29,19 @@
      <script src="app/templates/web-header/web-header.component.js"></script>
      <script src="app/templates/web-footer/web-footer.module.js"></script>
      <script src="app/templates/web-footer/web-footer.component.js"></script>
+     <script src="app/templates/left-nav-bar/left-nav-bar.module.js"></script>
+     <script src="app/templates/left-nav-bar/left-nav-bar.component.js"></script>
+     <script src="app/templates/coming-soon/coming-soon.module.js"></script>
+     <script src="app/templates/coming-soon/coming-soon.component.js"></script>
    	 <!-- <base href="/" /> -->
-     
-     <script type="text/javascript">
-	   function openNav() {
-		    document.getElementById("mySidenav").style.width = "250px";
-		}
-	
-		function closeNav() {
-		    document.getElementById("mySidenav").style.width = "0";
-		}
-	</script>
      
    </head>
    <body>
      
      <web-header></web-header>
      
+     <left-nav-bar></left-nav-bar>
+	
      <div ng-view ></div>
      
      <web-footer></web-footer>

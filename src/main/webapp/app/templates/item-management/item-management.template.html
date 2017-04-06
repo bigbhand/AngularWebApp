@@ -9,7 +9,7 @@
 </div>
 <br><br>
 <div ng-hide=$ctrl.isCreate>
-Search : <input type="text" size="58" ng-model="$ctrl.searchKey" placeholder=" search for item key"/>
+Search : <input type="text" size="58" ng-model="$ctrl.searchKey" ng-keypress="$ctrl.checkForEnter($event)" placeholder=" search for item key"/>
 		<input type="button" value="Search" ng-click="$ctrl.getItemDetails($ctrl.searchKey)"/>
 <br><br>
 </div>

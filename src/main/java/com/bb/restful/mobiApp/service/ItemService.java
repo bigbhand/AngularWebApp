@@ -68,7 +68,6 @@ public class ItemService {
 			String query = "SELECT * FROM PRODUCT WHERE ID = ?";
 			PreparedStatement statement = DBConnectionFactory.getJDBCConnection().prepareStatement(query);
 			statement.setString(1, id);
-			LOG.debug(query);
 			ResultSet rs = statement.executeQuery();
 			if(rs.next()){
 				item = new Item();
@@ -104,7 +103,7 @@ public class ItemService {
 		
 			PreparedStatement statement = DBConnectionFactory.getJDBCConnection().prepareStatement("INSERT INTO PRODUCT(ID,NAME,CATEGORY,SNIPPET,DESCR,PRICE,RATING,SELLER,DISCOUNT,STOCKS,COLOR) "
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-			statement.setInt(1, newID);
+			statement.setInt(1, item.getId());
 			statement.setString(2, item.getName());
 			statement.setString(3, item.getCategory());
 			statement.setString(4, item.getSnippet());
@@ -186,7 +185,7 @@ public class ItemService {
 		
 	}
 	
-	private int getNewItemID()
+	public int getNewItemID()
 	{
 		int id=0;
 		
