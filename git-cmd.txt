@@ -1,4 +1,4 @@
-git init : initialize new local repo
+git init 										: initialize new local repo
 
 git config --global user.name "Sam Smith"       : configure username
 
@@ -38,3 +38,5 @@ git reset HEAD .                                : resetting the working copy wit
 rm <filename>                                   : delete a file
 
 rm -rf <directory/>                             : delete a directory 
+
+more visit : https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
