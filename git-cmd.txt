@@ -1,0 +1,40 @@
+git init : initialize new local repo
+
+git config --global user.name "Sam Smith"       : configure username
+
+git config --global user.email sam@example.com  : configure password
+
+git clone path-to-repo                          : Create working copy of local repo
+
+git clone username@host:path-to-repo            : Create working copy from remote repo
+
+git add .                                       : add all files to staging
+
+git add <filename>                              : add single file to staging
+
+git commit -m "Commit-message"                  : Commit changes from staging to head (not to remote)
+
+git push origin/repoName/url master             : push changes to master branch of remote repo
+
+git status                                      : get the current status 
+
+git remote -v                                   : list currently configured remore repos
+
+git remote add origin/repoName <url>            : configure a remote repo
+
+git remote remove origin/repoName               : remove a configured remote repo
+
+git branch                                      : list all branches of your remote repo and your current branch
+
+git pull                                        : merge changes of remote rpo to working copy
+
+git pull repoName master --allow-unrelated-histories : merge all changes from master branch to working copy
+
+git fetch origin
+git reset --hard origin/master                  : Undo local changes and rset with the remote repo
+
+git reset HEAD .                                : resetting the working copy with HEAD
+
+rm <filename>                                   : delete a file
+
+rm -rf <directory/>                             : delete a directory 
