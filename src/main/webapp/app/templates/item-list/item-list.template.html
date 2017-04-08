@@ -39,7 +39,7 @@
 <!--  ng-model="$ctrl.search.name" will search only for Item Name -->
 <!--  ng-model="$ctrl.search" will search for all columns -->
 <br>
-<div ng-show="$ctrl.layout | doShow">
+<div ng-show="$ctrl.layout | doShow" >
 	<table class="likesTable">
 		<thead>
 			<tr>
@@ -71,8 +71,7 @@
 			<tr
 				ng-repeat="item in $ctrl.items | filter:$ctrl.search | orderBy:$ctrl.sortColumn:$ctrl.reverseSort | limitTo:$ctrl.rowLimit">
 				<td>{{item.id}}</td>
-				<td><a href="#/items/{{item.id}}">{{item.name |
-						uppercase }} </a></td>
+				<td><a href="#/items/{{item.id}}">{{item.name | uppercase }} </a></td>
 				<td>{{item.category | lowercase}}</td>
 				<!-- <td>{{item.releaseDate | date:'dd-MM-yyyy'}}</td> -->
 				<!-- <td>{{item.views | number}}</td> -->
@@ -80,18 +79,16 @@
 				<td>{{item.seller}}</td>
 				<td>{{item.price | currency:'&#8377; '}}</td>
 				<td>{{item.rating | ratingFilter}}</td>
-				<!-- <td width="180px"><input type="button" value="Like"
-					ng-click="$ctrl.incrementLikes(item)" /> <input type="button"
-					value="Dislike" ng-click="$ctrl.incrementDislikes(item)" /></td> -->
 				<td>
-					<span class="pointerClass" ng-click="$ctrl.showDeleteConfirm($event, item.id)">
-					<i class="fa fa-trash-o" style="{font-size: 10px;}"></i>
-					</span>
-					<span class="pointerClass" >
-					<a href="#/manage-item/{{item.id}}">
-						<i class="fa fa-pencil-square-o" style="margin-left:20px"></i>
-					</a>
-					</span>
+					<section layout="row" style="margin-left:-20px;">
+						<md-button class="md-icon-button" aria-label="edit_mode" ng-href="#/manage-item/{{item.id}}">
+		                 	 <md-icon class="material-icons">mode_edit</md-icon>
+		                 </md-button>
+						
+						 <md-button class="md-icon-button" aria-label="delete_forever" ng-click="$ctrl.showDeleteConfirm($event, item.id)">
+		                 	 <md-icon class="material-icons">delete_forever</md-icon>
+		                 </md-button>
+	                 </section>
 				</td>
 			</tr>
 		</tbody>

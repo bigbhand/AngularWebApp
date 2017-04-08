@@ -3,16 +3,15 @@ angular.module('itemManagement')
        .component('itemManagement',{
     	   
     	   templateUrl : 'app/templates/item-management/item-management.template.html',
-    	   controller : ['$routeParams','itemService',function ItemDetailsController($routeParams, itemService){
+    	   controller : ['$routeParams','itemService','$mdDialog',function ItemDetailsController($routeParams, itemService, $mdDialog){
     		   
     		   var self = this;
     		   
-    		   this.initialize = function(){
+    		   self.initialize = function(){
     			   
     			   self.mode = "view";
     			   self.regex="^[\\d]*$";
     			   self.isCreate = false;
-    			   self.status ="";
         		   
     			   self.initialItem =  {
     				   category: "",
@@ -37,26 +36,26 @@ angular.module('itemManagement')
     			   
     		   }
     		   
-    		   this.resetFields = function(){
+    		   self.resetFields = function(){
     			   
-    			   if(this.mode.startsWith("create"))
+    			   if(self.mode.startsWith("create"))
 				   {
-    				   this.isCreate = true;
-    				   this.item = angular.copy(self.initialItem);
-    				   this.getNewItemID();
+    				   self.isCreate = true;
+    				   self.item = angular.copy(self.initialItem);
+    				   self.getNewItemID();
 				   }else{
-					   this.isCreate = false;
-					   this.item = angular.copy(self.initialItem);
-					   this.searchKey = "";
+					   self.isCreate = false;
+					   self.item = angular.copy(self.initialItem);
+					   self.searchKey = "";
 				   }
     		   }
     		   
-    		   this.checkForEnter = function(event){
+    		   self.checkForEnter = function(event){
     			   
     			   console.log(event);
     			   if(event.keyCode == 13)
 				   {
-    				   this.getItemDetails(this.searchKey);
+    				   self.getItemDetails(self.searchKey);
 				   }
     		   }
     		   
@@ -64,7 +63,6 @@ angular.module('itemManagement')
             	   
             	   itemService.getItem(searchKey).success(function(item) 
             		{
-            		  self.status = "success";
             		  self.item = item;
             		});
             	   
@@ -72,21 +70,14 @@ angular.module('itemManagement')
                
                self.deleteItem = function(searchKey){
             	   
-            	  /* itemService.deleteItem(searchKey).then(function(result){
-            		  self.status = status;
-            		  self.item=angular.copy(self.initialItem);
-            		}, function(error){
-            			 self.status = "ERROR!!";
-            		});*/
-            	   
                        $http({
                            method : 'DELETE',
                            url : 'http://localhost:8080/mobiApp/webapi/items/' + searchKey
                        }).then(function(result){
-                 		  self.status = status;
                 		  self.item=angular.copy(self.initialItem);
+                		  self.showAlert('Success', 'Item with ID '+ searchKey +' has been successfully deleted');
                 		}, function(error){
-                			 self.status = "ERROR!!";
+                			self.showAlert('Error', 'Unable to delete the item at this moment, Try again later');
                 		});
             	   
                }
@@ -95,8 +86,8 @@ angular.module('itemManagement')
             	   
             	   itemService.addItem(item).success(function(item) 
             		{
-            		  self.status = "Added!";
-            		  self.item={};
+            		  self.showAlert('Success', 'Item with ID '+ item.id +' has been successfully created');
+            		  self.item= angular.copy(self.initialItem);
             		});
             	   
                }
@@ -105,7 +96,7 @@ angular.module('itemManagement')
 					   
 					   itemService.updateItem(item).success(function(item) 
 						{
-						  self.status = "Updated!";
+						  self.showAlert('Success', 'Item with ID '+ item.id +' has been successfully updated');
 						  self.item = item;
 						});
 					   
@@ -118,13 +109,22 @@ angular.module('itemManagement')
 								   console.log(result);
 								   console.log(result.data);
 								   self.item.id = result.data;
-								   self.status = "";
 							   },function failure(error){
-								   self.status = "ERROR!";
-							   })
+							   });
 				}
     		   
-				 this.initialize();
+				self.showAlert = function(title, message){
+					
+					var alert = $mdDialog.alert()
+					                     .clickOutsideToClose(true)
+					                     .title(title)
+					                     .textContent(message)
+					                     .ok('OK')
+					                     
+					$mdDialog.show(alert);
+				}
+				
+				self.initialize();
 				
     	   }]
     		   

@@ -110,7 +110,8 @@ angular.module('itemList')
 			   					
 			   					var confirmPop = $mdDialog.confirm()
 			   					                          .title('Delete')
-			   					                          .textContent('Are you sure you want to delete the item?')
+			   					                          .textContent('Are you sure you want to delete the item with ID '+id+'?')
+			   					                          .ariaLabel('TutorialsPoint.com (optional)')
 			   					                          .targetEvent(event)
 			   					                          .ok('Yes')
 			   					                          .cancel('No');
@@ -118,7 +119,7 @@ angular.module('itemList')
 			   					$mdDialog.show(confirmPop)
 			   					          .then(function ok(){
 			   					        	   
-			   					        	  /*self.deleteItem(id);*/
+			   					        	  self.deleteItem(id);
 			   					        	  
 			   					          }, function cancel(){
 			   					        	  
