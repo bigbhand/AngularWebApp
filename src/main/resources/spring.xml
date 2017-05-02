@@ -26,7 +26,13 @@
    		<property name="dataSource" ref="dataSource"></property>
    </bean>
    
+    <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+   		<constructor-arg ref="dataSource"></constructor-arg>
+   </bean>
+   
    <!-- "org.springframework.jdbc.datasource.DriverManagerDataSource" does not provide connection pooling meaning, 
    sfor every getConnection() call a new connection will be created. To overcome that we use commons dbcp/pool -->
+   
+   <!-- NamedParameterJdbcTemplate does not have dataSorce setter method. So, use constructor injection -->
 
 </beans>

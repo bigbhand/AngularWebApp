@@ -4,11 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.bb.restful.mobiApp.model.Item;
@@ -16,10 +17,11 @@ import com.bb.restful.mobiApp.model.Item;
 @Component
 public class ItemServiceSpring {
 
-	private static Logger LOG = LoggerFactory.getLogger(ItemService.class);
-	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedJdbcTemplate;
 	
 	public List<Item> getAllItems()
 	{
@@ -47,12 +49,20 @@ public class ItemServiceSpring {
 	public Item updateItem(Item item)
 	{
 		String sql = "UPDATE PRODUCT SET "
-					+ "NAME = ?,CATEGORY = ?,SNIPPET = ?,DESCR = ?,PRICE = ?,RATING = ?,SELLER = ?,DISCOUNT = ?,STOCKS = ?,COLOR = ? "
-					+ "WHERE ID = ?";
-		jdbcTemplate.update(sql, new Object[]{item.getName(), item.getCategory(), item.getSnippet(),
-				item.getDescr(), item.getPrice(), item.getRating(), item.getSeller(), item.getDiscount(), 
-				item.getStocks(), item.getColor(), item.getId()});
-		
+					+ "NAME = :name,CATEGORY = :category,SNIPPET = :snippet,DESCR = :descr,PRICE = :descr,RATING = :rating,SELLER = :seller,DISCOUNT = :discount,STOCKS = :stocks,COLOR = :color "
+					+ "WHERE ID = :id";
+		SqlParameterSource paramSource = new MapSqlParameterSource("name", item.getName())
+															    .addValue("category", item.getCategory())
+																.addValue("snippet", item.getSnippet())
+																.addValue("descr", item.getDescr())
+																.addValue("descr", item.getPrice())
+																.addValue("rating", item.getRating())
+																.addValue("seller", item.getSeller())
+																.addValue("discount", item.getDiscount())
+																.addValue("stocks", item.getStocks())
+																.addValue("color", item.getColor())
+																.addValue("id", item.getId());
+		namedJdbcTemplate.update(sql, paramSource);
 		return getItem(item.getId()+"");
 	}
 	
@@ -92,3 +102,10 @@ public class ItemServiceSpring {
 	}
 
 }
+
+/** query         - rowmapper SELECT
+ *  queryForObject - rowmapper SELECT
+ *  update     - int INSERT/UPDATE/DELETE
+ *  execute    - void DDL
+ */
+ 

@@ -45,7 +45,12 @@ public class ItemResource {
 	@Path("/{id}")
 	public Item getItem(@PathParam("id") String id)
 	{
-		return new ItemService().getItem(id);
+		/** JDBC Call **/
+		/*return new ItemService().getItem(id);*/
+		
+		/** Spring JDBC Call **/
+		ItemServiceSpring service = context.getBean("itemServiceSpring", ItemServiceSpring.class);
+		return service.getItem(id);
 	}
 	
 	@GET
@@ -53,20 +58,35 @@ public class ItemResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public int getNewItemID()
 	{
-		return new ItemService().getNewItemID();
+		/** JDBC Call **/
+		/*return new ItemService().getNewItemID();*/
+		
+		/** Spring JDBC Call **/
+		ItemServiceSpring service = context.getBean("itemServiceSpring", ItemServiceSpring.class);
+		return service.getNewItemID();
 	}
 	
 	@POST
 	public Item addItem(Item item)
 	{
-		return new ItemService().addItem(item);
+		/** JDBC Call **/
+		/*return new ItemService().addItem(item);*/
+		
+		/** Spring JDBC Call **/
+		ItemServiceSpring service = context.getBean("itemServiceSpring", ItemServiceSpring.class);
+		return service.addItem(item);
 	}
 	
 	@PUT
 	@Path("/{id}")
 	public Item updateItem(@PathParam("id") int id, Item item)
 	{
-		return new ItemService().updateItem(item);
+		/** JDBC Call **/
+		/*return new ItemService().updateItem(item);*/
+		
+		/** Spring JDBC Call **/
+		ItemServiceSpring service = context.getBean("itemServiceSpring", ItemServiceSpring.class);
+		return service.updateItem(item);
 	}
 	
 	@DELETE
@@ -75,6 +95,11 @@ public class ItemResource {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public int deleteItem(@PathParam("id") int id)
 	{
-		return new ItemService().deleteItem(id);
+		/** JDBC Call **/
+		/*return new ItemService().deleteItem(id);*/
+		
+		/** Spring JDBC Call **/
+		ItemServiceSpring service = context.getBean("itemServiceSpring", ItemServiceSpring.class);
+		return service.deleteItem(id);
 	}
 }

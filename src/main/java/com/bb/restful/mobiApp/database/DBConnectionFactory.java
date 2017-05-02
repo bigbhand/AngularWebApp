@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -20,8 +23,13 @@ public class DBConnectionFactory {
 	
 	private static Connection jdbcConnection = null;
 	
+	
 	static{
 		
+	}
+	
+	public static void main(String[] args)
+	{
 		
 	}
 	

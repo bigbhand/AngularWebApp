@@ -209,3 +209,10 @@ public class ItemService {
 	}
 
 }
+
+
+/** executeQuery     - rs SELECT
+ * executeUpdate     - int INSERT/UPDATE/DELETE/DDL(0)
+ * execute           - boolean DML/DDL
+ */
+ 

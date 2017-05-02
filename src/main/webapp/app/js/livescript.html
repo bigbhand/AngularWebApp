@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>LiveScript Demo</title>
+
+<!-- <script type="text/javascript" src="script1.js"></script>
+<script type="text/javascript" src="script2.js"></script>
+
+<script type="text/javascript">
+	//namespace example
+	
+	document.write(window.MobiApp.Script1.person("Ganesh", "Bhandari").getName());
+	
+</script> -->
+
+<!-- <script src="advancedjs.js"></script> -->
+<!-- <script type="text/javascript" src="CreatingClasses.js"></script> -->
+<!-- <script type="text/javascript" src="PrivateMembersAndMethods.js"></script> -->
+<!-- <script type="text/javascript" src="Inheritence.js"></script> -->
+<!-- <script type="text/javascript" src="InheritenceUsingAbstractClass.js"></script> -->
+<!-- <script type="text/javascript" src="Strings.js"></script> -->
+<!-- <script type="text/javascript" src="Arrays.js"></script> -->
+
+<style type="text/css">
+	table tr td{
+		height: 40px;
+		width: 120px;
+	}
+	
+	input[type=button] {
+		height: 30px;
+		width: 120px;
+		cursor: pointer;
+		margin-right: 6px;
+	}
+	
+	.subImage{
+		width: 80px;
+		height: 80px;
+		border: 3px solid grey;
+	}
+	
+	.mainImage{
+		width: 355px;
+		height: 240px;
+	}
+	
+</style>
+
+</head>
+<body>
+
+	<!-- <input type="button" value="Click me" onclick="alert(clickCounter())"/> -->
+	
+	<!-- <div>
+		<script type="text/javascript" src="StringManupulation.js"></script>
+		<table>
+			<tr>
+				<td>Email Address </td>
+				<td><input type="text" id="email" size="40"/></td>
+			</tr>
+			<tr>
+				<td>Email Part </td>
+				<td><input type="text" id="emailPart" size="40"/></td>
+			</tr>
+			<tr>
+				<td>Company Name </td>
+				<td><input type="text" id="companyName" size="40"/></td>
+			</tr>
+			<tr>
+				<td>Domain </td>
+				<td><input type="text" id="domain" size="40"/></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="button" value="Get Email Part and Domain" onclick="getEmailPartAndDomain()"/></td>
+			</tr>
+		</table>
+	</div> -->
+	
+	<!-- <div>
+		<script type="text/javascript" src="JSCookies.js"></script>
+		<select id="colorCombo" onchange="updateColorCookie()">
+			<option value="RED">Red</option>
+			<option value="GREEN">Green</option>
+			<option value="BLUE">Blue</option>
+		</select>
+	</div> -->
+	
+	<!-- <div>
+		<script type="text/javascript" src="JSMultiCookies.js"></script>
+		<table>
+			<tr>
+				<td>Name</td>
+				<td><input type="text" size="40" id="name"/></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="email" size="40" id="email"/></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td><select id="gender" onchange="updateGenderCookie()">
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="Set Cookies" onclick="setCookies()"/>
+					<input type="button" value="Get Cookies" onclick="getCookies()"/>
+					<input type="button" value="Clear Cookies" onclick="clearCookies()"/>
+				</td>
+			</tr>
+		</table>
+	</div> -->
+	
+	<!-- <div>
+		<script type="text/javascript" src="JSEvents.js"></script>
+		<input type="button" value="Click me" id="btn" >
+		<div id="clickInfo"></div>
+	</div> -->
+	
+	<!-- <div>
+		<script type="text/javascript" src="JSDates.js"></script>
+		<h2 id="now"></h2>
+		<h1 id="today"></h1>
+		<p id="dateInfo"></p>
+	</div> -->
+	
+	<!-- <div>
+		<script type="text/javascript" src="JSSlideShow.js"></script>
+		<img alt="slide-show" id="slide" src="../images/slideshow/1.jpg" height="300px" width="400px"/>
+		<br>
+		<input type="button" value="Start Slide-show" id="start"/>
+		<input type="button" value="Stop Slide-show" id="stop"/>
+	</div> -->
+
+	<div>
+		<img alt="main-image" src="../images/slideshow/1.jpg" class="mainImage" id="mainImage">
+		<div onclick="changeImage(event)" id="div">
+			<img alt="1" src="../images/slideshow/1.jpg" class="subImage"/>
+			<img alt="2" src="../images/slideshow/2.jpg" class="subImage"/>
+			<img alt="3" src="../images/slideshow/3.jpg" class="subImage"/>
+			<img alt="4" src="../images/slideshow/4.jpg"class="subImage"/>
+		</div>
+		<script type="text/javascript" src="JSThumbnail.js"></script>
+	</div>
+
+</body>
+</html>
